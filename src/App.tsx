@@ -57,7 +57,7 @@ function App() {
             <Layout className="site-layout">
                 <Header className="site-layout-background" style={{padding: 0}}/>
                 <Content style={{ margin: '8px 8px 0', overflow: 'initial' }}>
-                    <div className="site-layout-background" style={{height:"100%"}}>
+                    <div className="site-layout-background" style={{height:"100%",padding:10}}>
                         <Routing/>
                     </div>
                 </Content>
