@@ -3,7 +3,7 @@ import React from 'react';
 import {Route, Routes, Navigate} from "react-router-dom";
 import {CalendarComponent} from "../pages/CalendarComponent/CalendarComponent";
 import {StatisticsComponent} from "../pages/StatisticsComponent/StatisticsComponent";
-import {TaskComponent} from "../pages/TaskComponent/TaskComponent";
+import {TaskPageComponent} from "../pages/TaskComponent/TaskPageComponent";
 
 
 
@@ -16,7 +16,7 @@ export const Routing = () => {
                 </Route>
                 <Route path="/statistics" element={<StatisticsComponent/>}>
                 </Route>
-                <Route path="/tasks" element={<TaskComponent/>}>
+                <Route path="/tasks" element={<TaskPageComponent/>}>
                 </Route>
             </Routes>
         </>

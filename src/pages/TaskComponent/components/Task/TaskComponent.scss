@@ -1,0 +1,82 @@
+$primary-color: #1890ff;
+$grey-color: #d9d9d9;
+$error-color: #ff4d4f;
+$border-input: 1px solid $grey-color;
+.ant-input {
+  border-top: none;
+  border-left: none;
+  border-right: none ;
+  border-bottom: $border-input;
+}
+.ant-picker{
+  border-top: none;
+  border-left: none;
+  border-right: none ;
+  border-bottom: $border-input
+}
+.ant-input:focus{
+  border-color: $primary-color;
+  box-shadow: none;
+
+}
+.ant-form-item-has-error :not(.ant-input-disabled):not(.ant-input-borderless):focus{
+  box-shadow: none;
+}
+.ant-form-item-has-error .ant-picker{
+  border-color: $error-color !important;
+  box-shadow: none;
+}
+.ant-picker-focused  {
+  box-shadow: none;
+  border-color: $primary-color;
+}
+
+.task-title{
+  text-align: center;
+  color: $primary-color !important;
+  .ant-badge-status{
+    vertical-align: middle;
+    margin-left: 5px;
+  }
+}
+.task-description {
+  .ant-descriptions-item-label{
+    color: $primary-color;
+  }
+}
+.sub-task-list{
+  overflow: auto;
+  padding: 0 16px;
+  transition: max-height 0.5s;
+}
+.with-form{
+  max-height: 67vh
+}
+.without-form{
+  max-height: 70vh
+}
+
+.sub-task-form{
+  .ant-input-borderless{
+    border-bottom: 1px solid $primary-color;
+  }
+}
+.sub-task-edit-block{
+  text-align: center;
+  margin-top: 12px;
+  height: 32px;
+}
+.sub-task-elem{
+  cursor: pointer;
+}
+.sub-task-item {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.sub-task-item-completed{
+  background-color: #ededed70;
+  @extend .sub-task-item
+}
+.sub-task-completed{
+  cursor:default;
+}

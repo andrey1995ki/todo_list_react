@@ -1,0 +1,40 @@
+$primary-color: #1890ff;
+$grey-color: #d9d9d9;
+$error-color: #ff4d4f;
+$border-input: 1px solid $grey-color;
+
+.create-task-title{
+  text-align: center;
+  color: $primary-color !important;
+}
+.create-task-form{
+  .ant-input {
+    border-top: none;
+    border-left: none;
+    border-right: none ;
+    border-bottom: $border-input;
+  }
+  .ant-picker{
+    border-top: none;
+    border-left: none;
+    border-right: none ;
+    border-bottom: $border-input
+  }
+  .ant-input:focus{
+    border-color: $primary-color;
+    box-shadow: none;
+
+  }
+  .ant-form-item-has-error :not(.ant-input-disabled):not(.ant-input-borderless):focus{
+    box-shadow: none;
+  }
+  .ant-form-item-has-error .ant-picker{
+    border-color: $error-color !important;
+    box-shadow: none;
+  }
+  .ant-picker-focused  {
+    box-shadow: none;
+    border-color: $primary-color;
+  }
+
+}

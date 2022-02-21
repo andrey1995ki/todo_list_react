@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import './App.css';
+import './App.scss';
 import 'antd/dist/antd.css';
 import {Divider, Layout, Menu, Typography} from 'antd';
 import {CalendarOutlined, PieChartOutlined, UnorderedListOutlined,} from '@ant-design/icons';
