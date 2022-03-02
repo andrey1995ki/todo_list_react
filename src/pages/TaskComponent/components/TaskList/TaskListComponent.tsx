@@ -3,6 +3,8 @@ import {TaskListModelProps} from "./TaskList.model";
 import {Badge, Card, List, Typography} from "antd";
 import {ModalComponent} from "../../../../shared/Modal/ModalComponent";
 import {TaskComponent} from "../Task/TaskComponent";
+import './TaskListComponent.scss'
+import moment from "moment";
 
 const { Paragraph } = Typography;
 
@@ -25,12 +27,15 @@ export const TaskListComponent: FC<TaskListModelProps> = ({taskList,showModal,se
                     xxl: 3,
                 }}
                 dataSource={taskList}
-                renderItem={item => (
-                    <List.Item>
-                        <Card hoverable title={item.taskName}
+                renderItem={(item,index) => (
+                    <List.Item className={'card-item'}>
+                        <Card hoverable title={item.taskName} className={`task-card card-${index%2===0 ?'even':'not-even'}`}
                               extra={<Badge status={item.completed ? "success" : "error"}/>} onClick={()=>modalVisible(item.id)}>
                             <Paragraph ellipsis={{ rows: 3, expandable: false }}>
                             {item.taskDescription}
+                            </Paragraph>
+                            <Paragraph >
+                                Выполнить до: {moment(item.plannedAt).format('LL')}
                             </Paragraph>
                         </Card>
                     </List.Item>

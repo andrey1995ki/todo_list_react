@@ -50,10 +50,10 @@ $border-input: 1px solid $grey-color;
   transition: max-height 0.5s;
 }
 .with-form{
-  max-height: 67vh
+  max-height: 64vh
 }
 .without-form{
-  max-height: 70vh
+  max-height: 65vh
 }
 
 .sub-task-form{
@@ -79,4 +79,19 @@ $border-input: 1px solid $grey-color;
 }
 .sub-task-completed{
   cursor:default;
+}
+.task-delete-btn{
+  vertical-align:middle;
+  font-size:15px;
+  color: #c7c7c7b5;
+  &:hover,
+  &:focus{
+    color: $error-color;
+    font-size:18px;
+    transition: all ease-in 0.5s;
+  }
+}
+.task-btn{
+  margin-top: 50px;
+  text-align: center
 }

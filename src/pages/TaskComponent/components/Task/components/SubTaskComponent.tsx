@@ -5,9 +5,9 @@ import '../TaskComponent.scss'
 import {useDispatch} from "react-redux";
 import {addSubTask, updateTask} from "../../../../../store/TaskListStore/TaskListStore";
 import {PlusOutlined} from "@ant-design/icons";
-import {SubtaskListComponent} from "./SubtaskListComponent";
+import {SubTaskListComponent} from "./SubTaskListComponent";
 
-const SubtaskComponent: FC<SubTaskComponentModel> = ({subTask, taskId,completedTask}) => {
+const SubTaskComponent: FC<SubTaskComponentModel> = ({subTask, taskId,completedTask}) => {
     const [addNewSubTask, setAddNewSubTask] = useState<boolean>(false)
     const [createSubTask,setCreateSubTsk] = useState(false)
     const dispatch = useDispatch()
@@ -42,7 +42,7 @@ const SubtaskComponent: FC<SubTaskComponentModel> = ({subTask, taskId,completedT
             <div className={`sub-task-list ${addNewSubTask ? 'with-form' : 'without-form'}`}>
                 <List
                     dataSource={subTask.sort((a, b) => (parseInt(a.id, 10) < parseInt(b.id, 10) || a.completed > b.completed ? 1 : -1))}
-                    renderItem={item => <SubtaskListComponent subTask={item} taskId={taskId} chekCompletedSubTask={chekCompletedSubTask} completedTask={completedTask}/>}
+                    renderItem={item => <SubTaskListComponent subTask={item} taskId={taskId} chekCompletedSubTask={chekCompletedSubTask} completedTask={completedTask}/>}
                 />
             </div>
             <div className={'sub-task-edit-block'}>
@@ -69,4 +69,4 @@ const SubtaskComponent: FC<SubTaskComponentModel> = ({subTask, taskId,completedT
     )
 };
 
-export default SubtaskComponent;
+export default SubTaskComponent;

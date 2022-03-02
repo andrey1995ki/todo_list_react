@@ -176,3 +176,13 @@ export const updateTask=(parameter:any,taskId:string='0')=>async(dispatch:Dispat
         console.log(e)
     }
 }
+export const deleteTask=(taskId:string='0',subTask:Array<SubTaskList>)=>async()=>{
+    try {
+        subTask.map(task => taskAPI.deleteSubTask(taskId,task.id))
+        const response = await taskAPI.deleteTask(taskId)
+        console.log(response.data);
+    }
+    catch (e) {
+        console.log(e)
+    }
+}

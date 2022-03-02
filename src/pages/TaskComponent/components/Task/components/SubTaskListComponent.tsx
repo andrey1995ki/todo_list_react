@@ -5,7 +5,7 @@ import {deleteSubTasK, updateSubTask} from "../../../../../store/TaskListStore/T
 import {useDispatch} from "react-redux";
 import {SubTaskListModel} from "../TaskComponent.model";
 
-export const SubtaskListComponent: FC<SubTaskListModel> = ({subTask, taskId,chekCompletedSubTask,completedTask}) => {
+export const SubTaskListComponent: FC<SubTaskListModel> = ({subTask, taskId,chekCompletedSubTask,completedTask}) => {
     const dispatch = useDispatch()
     const [editSubTask, setEditSubTask] = useState({subTaskId: "0", edit: false})
     const onChecked = (checked: any, subTaskId: string) => {

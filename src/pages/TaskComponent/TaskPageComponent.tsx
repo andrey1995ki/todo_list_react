@@ -21,7 +21,7 @@ export const TaskPageComponent = () => {
     const [modalVisible, setModalVisible] = useState<boolean>(false)
     const [completedVisible, setCompletedVisible] = useState<boolean>(false)
     const [activeVisible, setActiveVisible] = useState<boolean>(true)
-    const [sort, setSort] = useState<sortType>('dateAsc')
+    const [sort, setSort] = useState<sortType>('dateEndAsc')
     useEffect(() => {
         if (!taskList || !modalVisible) {
             dispatch(receiveTaskList())

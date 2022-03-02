@@ -9,4 +9,4 @@ export interface TaskFilterModel {
     setSort: (sort:sortType)=>void
 }
 export type FilterTaskList = Array<TaskList>
-export type sortType = 'dateAsc'|"dateDesc"|"nameAsc"|"nameDesc"|"completed"|"active"
+export type sortType = 'dateStartAsc'|"dateStartDesc"|'dateEndAsc'|"dateEndDesc"|"nameAsc"|"nameDesc"|"completed"|"active"

@@ -37,8 +37,10 @@ export const TaskFilter: FC<TaskFilterModel> = ({
             <Menu.Item key={"sortItems"}>
                 <Radio.Group defaultValue={sort} buttonStyle="solid" onChange={(e) => setSort(e.target.value)}>
                     <Space direction="vertical">
-                        <Radio value="dateAsc">Дата создания: <ArrowDownOutlined/></Radio>
-                        <Radio value="dateDesc">Дата создания: <ArrowUpOutlined/></Radio>
+                        <Radio value="dateEndAsc">Дата окончания: <ArrowDownOutlined/></Radio>
+                        <Radio value="dateEndDesc">Дата окончания: <ArrowUpOutlined/></Radio>
+                        <Radio value="dateStartAsc">Дата создания: <ArrowDownOutlined/></Radio>
+                        <Radio value="dateStartDesc">Дата создания: <ArrowUpOutlined/></Radio>
                         <Radio value="nameAsc">Название задачи: <ArrowDownOutlined/></Radio>
                         <Radio value="nameDesc">Название задачи: <ArrowUpOutlined/></Radio>
                         {(activeVisible && completedVisible) &&

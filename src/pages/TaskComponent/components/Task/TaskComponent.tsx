@@ -1,11 +1,11 @@
 import React, {FC, useEffect, useState} from 'react';
 import {TaskComponentModel} from "./TaskComponent.model";
-import {Badge, Button, Col, Divider, Input, Popconfirm, Row, Skeleton, Space, Typography} from "antd";
+import {Badge, Button, Col, Divider, Input, Popconfirm, Row, Skeleton, Space, Tooltip, Typography} from "antd";
 import './TaskComponent.scss'
 import 'moment/locale/ru';
-import SubtaskComponent from "./components/SubtaskComponent";
+import SubTaskComponent from "./components/SubTaskComponent";
 import {useDispatch, useSelector} from "react-redux";
-import {receiveSubTaskList, receiveTask, updateTask} from "../../../../store/TaskListStore/TaskListStore";
+import {deleteTask, receiveSubTaskList, receiveTask, updateTask} from "../../../../store/TaskListStore/TaskListStore";
 import {
     getSubTaskList,
     getTask,
@@ -15,7 +15,7 @@ import {
 import SubTaskLoadingComponent from "./components/SubTaskLoadingComponent";
 import {RootReducer} from "../../../../store/store";
 import {TaskProgress} from "./components/TaskProgress";
-import {CheckOutlined} from "@ant-design/icons";
+import {CheckOutlined, DeleteOutlined} from "@ant-design/icons";
 import {TaskDataComponent} from "./components/TaskDataComponent";
 
 const {Title} = Typography;
@@ -34,6 +34,10 @@ export const TaskComponent: FC<TaskComponentModel> = ({taskId, closeModal}) => {
     }, [dispatch, taskId])
     const changeTaskStatus = (status: boolean) => {
         dispatch(updateTask({completed: status}, taskId))
+    }
+    const onDeleteTask = async () => {
+        subTask !==null && await dispatch(deleteTask(taskId,subTask))
+        await closeModal(false)
     }
     let countActiveSubTask = 0
     if (subTask) {
@@ -61,6 +65,18 @@ export const TaskComponent: FC<TaskComponentModel> = ({taskId, closeModal}) => {
                         }}>
                             {taskData?.taskName}
                             <Badge status={taskData?.completed ? "success" : "error"}/>
+                            {
+                                !taskData?.completed &&
+                                <Tooltip title="Удалить задачу">
+                                    <Popconfirm title="Удалить данную задачу, без возможности восстановления?"
+                                                okText="Удалить" cancelText="Нет"
+                                                onConfirm={onDeleteTask}
+                                    >
+                                        <DeleteOutlined className={'task-delete-btn'}/>
+                                    </Popconfirm>
+                                </Tooltip>
+                            }
+
                         </div>
                 }
             </Title>
@@ -80,12 +96,12 @@ export const TaskComponent: FC<TaskComponentModel> = ({taskId, closeModal}) => {
                 <Col flex="auto">
                     {subTask !== null && !loadingTaskList
                         ?
-                        <SubtaskComponent subTask={subTask} taskId={taskData?.id} completedTask={taskData?.completed}/>
+                        <SubTaskComponent subTask={subTask} taskId={taskData?.id} completedTask={taskData?.completed}/>
                         : <SubTaskLoadingComponent key={`loading_${taskData?.id}`}
                                                    countSubTask={taskData?.subTask.length}/>}
                 </Col>
             </Row>
-            <div style={{marginTop: 25, textAlign: "center"}}>
+            <div className={'task-btn'}>
                 <Space>
                     <Popconfirm title="Имеются незавершнные подзадачи, завершить основную?"
                                 onConfirm={() => changeTaskStatus(!taskData?.completed)}

@@ -54,6 +54,10 @@ export const taskAPI ={
                 ...parameter
             })
     },
+    deleteTask(taskId:string){
+        return instance
+            .delete(`/taskList/${taskId}`)
+    }
 
 
 }
