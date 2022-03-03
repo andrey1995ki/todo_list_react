@@ -22,12 +22,11 @@ export const TaskPageComponent = () => {
     const [activeVisible, setActiveVisible] = useState<boolean>(true)
     const [sort, setSort] = useState<sortType>('dateEndAsc')
     useEffect(() => {
-        if (updateTaskData||taskList===null) {
+        if ((updateTaskData&&!modalVisible)||taskList===null) {
             dispatch(receiveTaskList())
             setUpdateTaskData(false)
         }
-    }, [dispatch, updateTaskData,taskList])
-
+    }, [dispatch, updateTaskData,taskList,modalVisible])
     return (
         <div>
             <TaskHeader needUpdate={setUpdateTaskData} setShowCreateModal={setShowCreateModal} showCreateModal={showCreateModal}>

@@ -4,13 +4,10 @@ import {ModalComponentModel} from "./ModalComponent.model";
 import './ModalComponent.scss'
 
 
-export const ModalComponent: FC<ModalComponentModel> = ({isModalVisible, closeModal, children,needUpdate}) => {
+export const ModalComponent: FC<ModalComponentModel> = ({isModalVisible, closeModal, children}) => {
     return (
         <Modal title={false} visible={isModalVisible} onCancel={() => {
             closeModal(false)
-            if(needUpdate){
-                needUpdate(true)
-            }
         }}
                className={"task-modal-window"} width={'98vw'}
                bodyStyle={{overflow: "auto", height: '98vh', maxHeight: '98vh'}}

@@ -26,4 +26,5 @@ export interface CreatedSubTask {
 export interface TaskData {
     taskData:TaskList | null
     loading:boolean
+    needUpdate: (needUpdate:boolean)=>void
 }

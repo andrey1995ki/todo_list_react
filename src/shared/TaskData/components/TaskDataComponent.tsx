@@ -7,15 +7,16 @@ import '../../../App.scss'
 import {updateTask} from "../../../store/TaskListStore/TaskListStore";
 import {useDispatch} from "react-redux";
 
-export const TaskDataComponent: FC<TaskData> = ({taskData, loading}) => {
+export const TaskDataComponent: FC<TaskData> = ({taskData, loading, needUpdate}) => {
     const dispatch = useDispatch()
     const [editDescription, setEditDescription] = useState(false)
     const [editCreatedAt, setEditCreatedAt] = useState(false)
     const [editPlannedAt, setEditPlannedAt] = useState(false)
-    const updateTaskData = (newValue:string) => {
+    const updateTaskData = (newValue: string) => {
         setEditDescription(false)
-        if(newValue.length>0 && newValue !== taskData?.taskDescription){
-            dispatch(updateTask({taskDescription:newValue.trim()},taskData?.id))
+        if (newValue.length > 0 && newValue !== taskData?.taskDescription) {
+            dispatch(updateTask({taskDescription: newValue.trim()}, taskData?.id))
+            needUpdate(true)
         }
     }
     return (
@@ -25,7 +26,9 @@ export const TaskDataComponent: FC<TaskData> = ({taskData, loading}) => {
                     {loading
                         ? <Skeleton active paragraph={{rows: 1}} title={false} style={{margin: 0}}/>
                         : editDescription
-                            ? <Input.TextArea autoFocus onBlur={(e) => {updateTaskData(e.target.value)}} defaultValue={taskData?.taskDescription} autoSize maxLength={500} showCount/>
+                            ? <Input.TextArea autoFocus onBlur={(e) => {
+                                updateTaskData(e.target.value)
+                            }} defaultValue={taskData?.taskDescription} autoSize maxLength={500} showCount/>
                             : <div onDoubleClick={() => {
                                 !taskData?.completed &&
                                 setEditDescription(true)
@@ -43,7 +46,12 @@ export const TaskDataComponent: FC<TaskData> = ({taskData, loading}) => {
                                           autoFocus
                                           open
                                           disabledDate={(current) => current > moment(taskData?.plannedAt)}
-                                          onChange={(value)=>{value && dispatch(updateTask({createdAt:value.format('YYYY-MM-DD HH:mm:ss')},taskData?.id))}}
+                                          onChange={(value) => {
+                                              if (value) {
+                                                  dispatch(updateTask({createdAt: value.format('YYYY-MM-DD HH:mm:ss')}, taskData?.id))
+                                                  needUpdate(true)
+                                              }
+                                          }}
                             />
                             : <div
                                 onDoubleClick={() => {
@@ -58,16 +66,22 @@ export const TaskDataComponent: FC<TaskData> = ({taskData, loading}) => {
                         ? <Skeleton active paragraph={{rows: 1}} title={false} style={{margin: 0}}/>
                         : editPlannedAt
                             ? <DatePicker showTime format="DD.MM.YYYY HH:mm:ss" style={{width: '100%'}} locale={locale}
-                                          defaultValue={moment(taskData?.plannedAt)} disabledDate={(current) => current < moment(taskData?.createdAt)}
+                                          defaultValue={moment(taskData?.plannedAt)}
+                                          disabledDate={(current) => current < moment(taskData?.createdAt)}
                                           onOpenChange={(open) => !open && setEditPlannedAt(false)}
                                           autoFocus
                                           open
-                                          onChange={(value)=>{value && dispatch(updateTask({plannedAt:value.format('YYYY-MM-DD HH:mm:ss')},taskData?.id))}}
+                                          onChange={(value) => {
+                                              if (value) {
+                                                  dispatch(updateTask({plannedAt: value.format('YYYY-MM-DD HH:mm:ss')}, taskData?.id))
+                                                  needUpdate(true)
+                                              }
+                                          }}
                             />
-                            : <div onDoubleClick={()=> {
+                            : <div onDoubleClick={() => {
                                 !taskData?.completed &&
                                 setEditPlannedAt(true)
-                            }}>{ moment(taskData?.plannedAt).format('LLL')}</div>
+                            }}>{moment(taskData?.plannedAt).format('LLL')}</div>
                     }
                 </Descriptions.Item>
                 <Descriptions.Item

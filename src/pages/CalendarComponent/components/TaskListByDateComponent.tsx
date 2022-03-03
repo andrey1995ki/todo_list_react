@@ -24,11 +24,12 @@ export const TaskListByDateComponent: FC<TaskListByDateModel> = ({
     const [idShowTask, setIdShowTask] = useState<string>('0')
     const dispatch = useDispatch()
     useEffect(() => {
-        if (updateTaskData) {
+        console.log(updateTaskData,showModal);
+        if (updateTaskData&&!showModal) {
             dispatch(receiveTaskList())
             setUpdateTaskData(false)
         }
-    }, [dispatch, updateTaskData])
+    }, [dispatch, updateTaskData,showModal])
     const modalVisible = (id: string) => {
         setIdShowTask(id)
         setShowModal(true)
@@ -88,7 +89,7 @@ export const TaskListByDateComponent: FC<TaskListByDateModel> = ({
                     </List.Item>
                 )}
             />
-            <ModalComponent isModalVisible={showModal} closeModal={setShowModal} needUpdate={setUpdateTaskData}>
+            <ModalComponent isModalVisible={showModal} closeModal={setShowModal}>
                 <TaskComponent taskId={idShowTask} closeModal={setShowModal} needUpdate={setUpdateTaskData}/>
             </ModalComponent>
         </div>

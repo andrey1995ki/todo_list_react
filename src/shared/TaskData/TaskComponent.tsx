@@ -33,9 +33,11 @@ export const TaskComponent: FC<TaskComponentModel> = ({taskId, closeModal, needU
         dispatch(receiveSubTaskList(taskId))
     }, [dispatch, taskId])
     const changeTaskStatus = (status: boolean) => {
+        needUpdate(true)
         dispatch(updateTask({completed: status}, taskId))
     }
     const onDeleteTask = async () => {
+        needUpdate(true)
         subTask !==null && await dispatch(deleteTask(taskId,subTask))
         await closeModal(false)
     }
@@ -48,6 +50,7 @@ export const TaskComponent: FC<TaskComponentModel> = ({taskId, closeModal, needU
         setEditTaskName(false)
         if (newValue.length > 0 && newValue !== taskData?.taskName) {
             dispatch(updateTask({taskName: newValue.trim()}, taskId))
+            needUpdate(true)
         }
     }
     return (
@@ -88,7 +91,7 @@ export const TaskComponent: FC<TaskComponentModel> = ({taskId, closeModal, needU
             <Divider/>
             <Row style={{height: '70vh'}}>
                 <Col flex="400px">
-                    <TaskDataComponent taskData={taskData} loading={loadingTask}/>
+                    <TaskDataComponent taskData={taskData} loading={loadingTask} needUpdate={needUpdate}/>
                 </Col>
                 <Col flex="20px">
                     <Divider type={"vertical"} style={{height: '100%'}}/>
