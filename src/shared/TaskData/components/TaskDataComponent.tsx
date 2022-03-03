@@ -3,8 +3,8 @@ import {TaskData} from "../TaskComponent.model";
 import {DatePicker, Descriptions, Input, Skeleton} from "antd";
 import moment from "moment";
 import locale from "antd/es/date-picker/locale/ru_RU";
-import '../../../../../App.scss'
-import {updateTask} from "../../../../../store/TaskListStore/TaskListStore";
+import '../../../App.scss'
+import {updateTask} from "../../../store/TaskListStore/TaskListStore";
 import {useDispatch} from "react-redux";
 
 export const TaskDataComponent: FC<TaskData> = ({taskData, loading}) => {

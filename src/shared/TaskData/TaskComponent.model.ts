@@ -1,9 +1,9 @@
-import {SubTaskList, TaskList} from "../../../../store/TaskListStore/TaskList.model";
+import {SubTaskList, TaskList} from "../../store/TaskListStore/TaskList.model";
 
 export interface TaskComponentModel {
     taskId: string
     closeModal: (showModal:boolean)=>void
-    needUpdate?: (needUpdate:boolean)=>void
+    needUpdate: (needUpdate:boolean)=>void
 }
 
 export interface SubTaskComponentModel {
@@ -26,8 +26,4 @@ export interface CreatedSubTask {
 export interface TaskData {
     taskData:TaskList | null
     loading:boolean
-}
-export interface TaskEditData {
-    taskData:TaskList | null
-    setEditData: (editData: boolean)=>void
 }

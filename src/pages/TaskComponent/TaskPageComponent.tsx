@@ -1,17 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Col, Divider, Row} from "antd";
-import {PlusOutlined} from "@ant-design/icons";
+import {Divider} from "antd";
 import {TaskListComponent} from "./components/TaskList/TaskListComponent";
 import {useDispatch, useSelector} from "react-redux";
 import {getTaskList, toggleLoading} from "../../store/TaskListStore/TaskList.selectors";
 import {receiveTaskList} from "../../store/TaskListStore/TaskListStore";
 import {PreloaderComponent} from "../../shared/Prloader/PreloaderComponent";
 import {RootReducer} from "../../store/store";
-import {ModalComponent} from "../../shared/Modal/ModalComponent";
-import {CreateTaskComponent} from "./components/CreateTask/CreateTaskComponent";
 import {TaskFilter} from "./components/Filter/TaskFilter";
 import {filterData} from "./components/Filter/FilterData";
 import {sortType} from "./components/Filter/TaskFilter.model";
+import {TaskHeader} from "../../shared/TaskHeader/TaskHeader";
 
 export const TaskPageComponent = () => {
     const dispatch = useDispatch()
@@ -32,18 +30,11 @@ export const TaskPageComponent = () => {
 
     return (
         <div>
-            <Row justify="space-between">
-                <Col span={8}>
-                    <Button icon={<PlusOutlined/>} onClick={() => setShowCreateModal(true)}>
-                        Создать новую задачу
-                    </Button>
-                </Col>
-                <Col span={8} style={{textAlign: "right", marginRight: 10}}>
-                    <TaskFilter completedVisible={completedVisible} setCompletedVisible={setCompletedVisible}
-                                activeVisible={activeVisible} setActiveVisible={setActiveVisible} sort={sort}
-                                setSort={setSort}/>
-                </Col>
-            </Row>
+            <TaskHeader needUpdate={setUpdateTaskData} setShowCreateModal={setShowCreateModal} showCreateModal={showCreateModal}>
+                <TaskFilter completedVisible={completedVisible} setCompletedVisible={setCompletedVisible}
+                            activeVisible={activeVisible} setActiveVisible={setActiveVisible} sort={sort}
+                            setSort={setSort}/>
+            </TaskHeader>
             <Divider/>
             {
                 taskList !== null && !loadingTaskList
@@ -54,9 +45,6 @@ export const TaskPageComponent = () => {
                     />
                     : <PreloaderComponent preloaderTitle={"Загрузка задач"}/>
             }
-            <ModalComponent isModalVisible={showCreateModal} closeModal={setShowCreateModal} needUpdate={setUpdateTaskData}>
-                <CreateTaskComponent closeModal={setShowCreateModal}/>
-            </ModalComponent>
         </div>
     );
 };

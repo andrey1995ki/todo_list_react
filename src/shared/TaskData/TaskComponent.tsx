@@ -5,16 +5,16 @@ import './TaskComponent.scss'
 import 'moment/locale/ru';
 import SubTaskComponent from "./components/SubTaskComponent";
 import {useDispatch, useSelector} from "react-redux";
-import {deleteTask, receiveSubTaskList, receiveTask, updateTask} from "../../../../store/TaskListStore/TaskListStore";
+import {deleteTask, receiveSubTaskList, receiveTask, updateTask} from "../../store/TaskListStore/TaskListStore";
 import {
     getSubTaskList,
     getTask,
     toggleLoadingTask,
     toggleSubTaskLoading
-} from "../../../../store/TaskListStore/TaskList.selectors";
+} from "../../store/TaskListStore/TaskList.selectors";
 import SubTaskLoadingComponent from "./components/SubTaskLoadingComponent";
-import {RootReducer} from "../../../../store/store";
-import {TaskProgress} from "../../../../shared/TaskProgress/TaskProgress";
+import {RootReducer} from "../../store/store";
+import {TaskProgress} from "../TaskProgress/TaskProgress";
 import {CheckOutlined, DeleteOutlined} from "@ant-design/icons";
 import {TaskDataComponent} from "./components/TaskDataComponent";
 
@@ -114,12 +114,7 @@ export const TaskComponent: FC<TaskComponentModel> = ({taskId, closeModal, needU
                             (taskData?.completed || countActiveSubTask === 0) && changeTaskStatus(!taskData?.completed)
                         }}>{taskData?.completed ? 'Вернуть задачу в работу' : 'Выполнить задачу'}</Button>
                     </Popconfirm>
-                    <Button block onClick={() => {
-                        closeModal(false)
-                        if (needUpdate){
-                            needUpdate(true)
-                        }
-                    }}>Закрыть</Button>
+                    <Button block onClick={() => closeModal(false)}>Закрыть</Button>
                 </Space>
             </div>
         </div>

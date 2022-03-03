@@ -2,7 +2,7 @@ import React, {FC, useState} from 'react';
 import {TaskListModelProps} from "./TaskList.model";
 import {Badge, Card, List, Typography} from "antd";
 import {ModalComponent} from "../../../../shared/Modal/ModalComponent";
-import {TaskComponent} from "../Task/TaskComponent";
+import {TaskComponent} from "../../../../shared/TaskData/TaskComponent";
 import './TaskListComponent.scss'
 import moment from "moment";
 

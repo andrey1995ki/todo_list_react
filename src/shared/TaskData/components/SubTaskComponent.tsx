@@ -3,7 +3,7 @@ import {Button, Form, Input, List, notification, Space} from "antd";
 import {CreatedSubTask, SubTaskComponentModel} from "../TaskComponent.model";
 import '../TaskComponent.scss'
 import {useDispatch} from "react-redux";
-import {addSubTask, updateTask} from "../../../../../store/TaskListStore/TaskListStore";
+import {addSubTask, updateTask} from "../../../store/TaskListStore/TaskListStore";
 import {PlusOutlined} from "@ant-design/icons";
 import {SubTaskListComponent} from "./SubTaskListComponent";
 

@@ -3,5 +3,5 @@ export interface TaskListModelProps {
     taskList:Array<TaskList>
     showModal: boolean
     setShowModal: (showModal: boolean)=>void
-    needUpdate?:(needUpdate:boolean)=>void
+    needUpdate:(needUpdate:boolean)=>void
 }

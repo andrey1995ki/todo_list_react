@@ -5,9 +5,10 @@ import '../CalendarComponent.scss'
 import {Badge, Descriptions, Divider, List, Tooltip, Typography} from "antd";
 import {TaskProgress} from "../../../shared/TaskProgress/TaskProgress";
 import {ModalComponent} from "../../../shared/Modal/ModalComponent";
-import {TaskComponent} from "../../TaskComponent/components/Task/TaskComponent";
+import {TaskComponent} from "../../../shared/TaskData/TaskComponent";
 import {useDispatch} from "react-redux";
 import {receiveTaskList} from "../../../store/TaskListStore/TaskListStore";
+import {TaskHeader} from "../../../shared/TaskHeader/TaskHeader";
 
 const {Title} = Typography;
 
@@ -17,17 +18,18 @@ export const TaskListByDateComponent: FC<TaskListByDateModel> = ({
                                                                      sortAt
                                                                  }) => {
     const [sortTask, setSortTask] = useState(sortAt)
-    const [showModal,setShowModal] = useState(false)
-    const [updateTaskData,setUpdateTaskData]= useState(false)
+    const [showModal, setShowModal] = useState(false)
+    const [showCreateModal, setShowCreateModal] = useState(false)
+    const [updateTaskData, setUpdateTaskData] = useState(false)
     const [idShowTask, setIdShowTask] = useState<string>('0')
     const dispatch = useDispatch()
-    useEffect(()=>{
-        if (updateTaskData){
+    useEffect(() => {
+        if (updateTaskData) {
             dispatch(receiveTaskList())
             setUpdateTaskData(false)
         }
-    },[dispatch,updateTaskData])
-    const modalVisible = (id:string) => {
+    }, [dispatch, updateTaskData])
+    const modalVisible = (id: string) => {
         setIdShowTask(id)
         setShowModal(true)
     }
@@ -45,13 +47,17 @@ export const TaskListByDateComponent: FC<TaskListByDateModel> = ({
             <Title level={2} className={"task-list-title"}>
                 {selectedDate.format('LL')}
             </Title>
-            <Divider/>
+            <Divider className={'task-list-divider'}/>
+            <TaskHeader showCreateModal={showCreateModal} setShowCreateModal={setShowCreateModal} needUpdate={setUpdateTaskData}>
+
+            </TaskHeader>
+            <Divider className={'task-list-divider'}/>
             <List
                 itemLayout="horizontal"
                 dataSource={taskListByDate}
                 className={'task-list-by-date'}
                 renderItem={item => (
-                    <List.Item onClick={()=>modalVisible(item.id)}>
+                    <List.Item onClick={() => modalVisible(item.id)}>
                         <List.Item.Meta
                             title={<>{item.taskName}<Badge status={item.completed ? "success" : "error"}/></>}
                             description={

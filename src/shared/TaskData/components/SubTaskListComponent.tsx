@@ -1,7 +1,7 @@
 import React, {useState, FC} from 'react';
 import {Button, Checkbox, Input, List, message, Popconfirm} from "antd";
 import {DeleteOutlined} from "@ant-design/icons";
-import {deleteSubTasK, updateSubTask} from "../../../../../store/TaskListStore/TaskListStore";
+import {deleteSubTasK, updateSubTask} from "../../../store/TaskListStore/TaskListStore";
 import {useDispatch} from "react-redux";
 import {SubTaskListModel} from "../TaskComponent.model";
 
