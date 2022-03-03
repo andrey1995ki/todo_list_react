@@ -1,4 +1,4 @@
-import {TaskList} from '../../store/TaskListStore/TaskList.model'
+import {TaskList} from '../../../../store/TaskListStore/TaskList.model'
 
 export interface TaskFilterModel {
     completedVisible: boolean
