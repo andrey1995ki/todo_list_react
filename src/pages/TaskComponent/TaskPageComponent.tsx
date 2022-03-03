@@ -9,9 +9,9 @@ import {PreloaderComponent} from "../../shared/Prloader/PreloaderComponent";
 import {RootReducer} from "../../store/store";
 import {ModalComponent} from "../../shared/Modal/ModalComponent";
 import {CreateTaskComponent} from "./components/CreateTask/CreateTaskComponent";
-import {TaskFilter} from "../../shared/Filter/TaskFilter";
-import {filterData} from "../../shared/Filter/FilterData";
-import {sortType} from "../../shared/Filter/TaskFilter.model";
+import {TaskFilter} from "./components/Filter/TaskFilter";
+import {filterData} from "./components/Filter/FilterData";
+import {sortType} from "./components/Filter/TaskFilter.model";
 
 export const TaskPageComponent = () => {
     const dispatch = useDispatch()
