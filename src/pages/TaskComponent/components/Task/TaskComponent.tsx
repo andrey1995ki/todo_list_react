@@ -14,14 +14,14 @@ import {
 } from "../../../../store/TaskListStore/TaskList.selectors";
 import SubTaskLoadingComponent from "./components/SubTaskLoadingComponent";
 import {RootReducer} from "../../../../store/store";
-import {TaskProgress} from "./components/TaskProgress";
+import {TaskProgress} from "../../../../shared/TaskProgress/TaskProgress";
 import {CheckOutlined, DeleteOutlined} from "@ant-design/icons";
 import {TaskDataComponent} from "./components/TaskDataComponent";
 
 const {Title} = Typography;
 
 
-export const TaskComponent: FC<TaskComponentModel> = ({taskId, closeModal}) => {
+export const TaskComponent: FC<TaskComponentModel> = ({taskId, closeModal, needUpdate}) => {
     const dispatch = useDispatch()
     const subTask = useSelector((state: RootReducer) => getSubTaskList(state))
     const loadingTaskList = useSelector((state: RootReducer) => toggleSubTaskLoading(state))
@@ -114,7 +114,12 @@ export const TaskComponent: FC<TaskComponentModel> = ({taskId, closeModal}) => {
                             (taskData?.completed || countActiveSubTask === 0) && changeTaskStatus(!taskData?.completed)
                         }}>{taskData?.completed ? 'Вернуть задачу в работу' : 'Выполнить задачу'}</Button>
                     </Popconfirm>
-                    <Button block onClick={() => closeModal(false)}>Закрыть</Button>
+                    <Button block onClick={() => {
+                        closeModal(false)
+                        if (needUpdate){
+                            needUpdate(true)
+                        }
+                    }}>Закрыть</Button>
                 </Space>
             </div>
         </div>

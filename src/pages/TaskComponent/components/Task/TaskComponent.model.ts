@@ -3,6 +3,7 @@ import {SubTaskList, TaskList} from "../../../../store/TaskListStore/TaskList.mo
 export interface TaskComponentModel {
     taskId: string
     closeModal: (showModal:boolean)=>void
+    needUpdate?: (needUpdate:boolean)=>void
 }
 
 export interface SubTaskComponentModel {
@@ -12,9 +13,6 @@ export interface SubTaskComponentModel {
 }
 export interface SubTaskLoading {
     countSubTask: number | undefined
-}
-export interface TaskProgressModel {
-    subTask: Array<SubTaskList>
 }
 export interface SubTaskListModel{
     subTask: SubTaskList

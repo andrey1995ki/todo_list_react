@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {TaskProgressModel} from "../TaskComponent.model";
+import {TaskProgressModel} from "./TaskProgress.model";
 import {Progress} from "antd";
 
 export const TaskProgress:FC<TaskProgressModel> = ({subTask}) => {

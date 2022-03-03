@@ -8,7 +8,7 @@ import moment from "moment";
 
 const { Paragraph } = Typography;
 
-export const TaskListComponent: FC<TaskListModelProps> = ({taskList,showModal,setShowModal}) => {
+export const TaskListComponent: FC<TaskListModelProps> = ({taskList,showModal,setShowModal,needUpdate}) => {
     const [idShowTask, setIdShowTask] = useState<string>('0')
     const modalVisible = (id:string) => {
         setIdShowTask(id)
@@ -41,8 +41,8 @@ export const TaskListComponent: FC<TaskListModelProps> = ({taskList,showModal,se
                     </List.Item>
                 )}
             />
-            <ModalComponent isModalVisible={showModal} closeModal={setShowModal}>
-                <TaskComponent taskId={idShowTask} closeModal={setShowModal}/>
+            <ModalComponent isModalVisible={showModal} closeModal={setShowModal} needUpdate={needUpdate}>
+                <TaskComponent taskId={idShowTask} closeModal={setShowModal} needUpdate={needUpdate}/>
             </ModalComponent>
         </div>
     );

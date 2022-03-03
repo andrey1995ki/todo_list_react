@@ -19,14 +19,16 @@ export const TaskPageComponent = () => {
     const loadingTaskList = useSelector((state: RootReducer) => toggleLoading(state))
     const [showCreateModal, setShowCreateModal] = useState<boolean>(false)
     const [modalVisible, setModalVisible] = useState<boolean>(false)
+    const [updateTaskData,setUpdateTaskData]= useState(false)
     const [completedVisible, setCompletedVisible] = useState<boolean>(false)
     const [activeVisible, setActiveVisible] = useState<boolean>(true)
     const [sort, setSort] = useState<sortType>('dateEndAsc')
     useEffect(() => {
-        if (!taskList || !modalVisible) {
+        if (updateTaskData||taskList===null) {
             dispatch(receiveTaskList())
+            setUpdateTaskData(false)
         }
-    }, [dispatch, modalVisible])
+    }, [dispatch, updateTaskData,taskList])
 
     return (
         <div>
@@ -47,10 +49,12 @@ export const TaskPageComponent = () => {
                 taskList !== null && !loadingTaskList
                     ? <TaskListComponent taskList={filterData(taskList, completedVisible, activeVisible, sort)}
                                          showModal={modalVisible}
-                                         setShowModal={setModalVisible}/>
+                                         setShowModal={setModalVisible}
+                                         needUpdate={setUpdateTaskData}
+                    />
                     : <PreloaderComponent preloaderTitle={"Загрузка задач"}/>
             }
-            <ModalComponent isModalVisible={showCreateModal} closeModal={setShowCreateModal}>
+            <ModalComponent isModalVisible={showCreateModal} closeModal={setShowCreateModal} needUpdate={setUpdateTaskData}>
                 <CreateTaskComponent closeModal={setShowCreateModal}/>
             </ModalComponent>
         </div>
