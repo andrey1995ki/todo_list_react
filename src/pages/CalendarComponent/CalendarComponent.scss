@@ -68,6 +68,14 @@ $primary-color: #1890ff;
   text-align: center;
   color: $primary-color !important;
 }
+.calendar-list-title{
+  @extend .task-list-title;
+  cursor: pointer;
+  margin-bottom: 0.7em!important;
+}
+.with-link{
+  margin-bottom: 0!important;
+}
 
 .task-list-by-date {
   max-height: 80vh;
@@ -86,4 +94,7 @@ $primary-color: #1890ff;
 }
 .task-list-divider{
   margin: 5px 0;
+}
+.calendar-task-sort{
+  text-align: right;
 }

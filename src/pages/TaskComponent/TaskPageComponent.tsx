@@ -6,9 +6,9 @@ import {getTaskList, toggleLoading} from "../../store/TaskListStore/TaskList.sel
 import {receiveTaskList} from "../../store/TaskListStore/TaskListStore";
 import {PreloaderComponent} from "../../shared/Prloader/PreloaderComponent";
 import {RootReducer} from "../../store/store";
-import {TaskFilter} from "./components/Filter/TaskFilter";
-import {filterData} from "./components/Filter/FilterData";
-import {sortType} from "./components/Filter/TaskFilter.model";
+import {TaskFilter} from "../../shared/Filter/TaskFilter";
+import {filterData} from "../../shared/Filter/FilterData";
+import {sortType} from "../../shared/Filter/TaskFilter.model";
 import {TaskHeader} from "../../shared/TaskHeader/TaskHeader";
 
 export const TaskPageComponent = () => {
@@ -32,7 +32,7 @@ export const TaskPageComponent = () => {
             <TaskHeader needUpdate={setUpdateTaskData} setShowCreateModal={setShowCreateModal} showCreateModal={showCreateModal}>
                 <TaskFilter completedVisible={completedVisible} setCompletedVisible={setCompletedVisible}
                             activeVisible={activeVisible} setActiveVisible={setActiveVisible} sort={sort}
-                            setSort={setSort}/>
+                            setSort={setSort} locationButton={'task'}/>
             </TaskHeader>
             <Divider/>
             {
