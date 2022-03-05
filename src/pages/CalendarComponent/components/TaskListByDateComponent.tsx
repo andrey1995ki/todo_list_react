@@ -28,15 +28,24 @@ export const TaskListByDateComponent: FC<TaskListByDateModel> = ({
     const [updateTaskData, setUpdateTaskData] = useState(false)
     const [completed, setCompletedVisible] = useState<boolean>(completedVisible)
     const [active, setActiveVisible] = useState<boolean>(activeVisible)
+    const [createdVisible, setCreatedVisible] = useState<boolean>(sortAt === 'createdAt')
+    const [plannedVisible, setPlannedVisible] = useState<boolean>(sortAt === 'plannedAt')
     const [idShowTask, setIdShowTask] = useState<string>('0')
+    const taskInDayVisible = {
+        createdVisible,
+        setCreatedVisible,
+        plannedVisible,
+        setPlannedVisible,
+        selectedDate
+    }
     const dispatch = useDispatch()
     useEffect(() => {
-        console.log(updateTaskData,showModal);
-        if (updateTaskData&&!showModal) {
+        console.log(updateTaskData, showModal);
+        if (updateTaskData && !showModal) {
             dispatch(receiveTaskList())
             setUpdateTaskData(false)
         }
-    }, [dispatch, updateTaskData,showModal])
+    }, [dispatch, updateTaskData, showModal])
     const modalVisible = (id: string) => {
         setIdShowTask(id)
         setShowModal(true)
@@ -47,18 +56,21 @@ export const TaskListByDateComponent: FC<TaskListByDateModel> = ({
                 {selectedDate.format('LL')}
             </Title>
             <Divider className={'task-list-divider'}/>
-            <TaskHeader showCreateModal={showCreateModal} setShowCreateModal={setShowCreateModal} needUpdate={setUpdateTaskData}>
+            <TaskHeader showCreateModal={showCreateModal} setShowCreateModal={setShowCreateModal}
+                        needUpdate={setUpdateTaskData} createdTaskData={selectedDate}>
                 <TaskFilter completedVisible={completed}
                             setCompletedVisible={setCompletedVisible}
                             activeVisible={active} setActiveVisible={setActiveVisible}
                             locationButton={'taskByDay'}
                             sort={sortTask} setSort={setSortTask}
+                            taskInDayVisible={taskInDayVisible}
                 />
             </TaskHeader>
             <Divider className={'task-list-divider'}/>
             <List
                 itemLayout="horizontal"
-                dataSource={filterDataInDay(selectedDate,taskList, completed, active, sortTask)}
+                dataSource={filterDataInDay(selectedDate, taskList, completed, active, sortTask, createdVisible,
+                    plannedVisible)}
                 className={'task-list-by-date'}
                 renderItem={item => (
                     <List.Item onClick={() => modalVisible(item.id)}>

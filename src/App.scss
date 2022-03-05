@@ -1,3 +1,35 @@
-.site-layout .site-layout-background {
+.app-main-layout .app-main-layout-background {
   background: #fff;
+  padding: 0;
+}
+
+.app-main-content-background {
+  height: 100%;
+  @extend .app-main-layout-background;
+}
+
+.app-main-content {
+  margin: 8px 8px 0;
+  overflow: initial;
+}
+
+.app-layout {
+  min-height: 100vh;
+}
+
+.app-menu-header {
+  text-align: center;
+  height: 64px;
+  line-height: 64px;
+}
+
+.app-menu-header-title {
+  color: #1890ff !important;
+  line-height: normal !important;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.app-menu-divider {
+  margin: 0 !important;
 }

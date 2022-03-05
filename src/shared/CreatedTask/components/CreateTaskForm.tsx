@@ -1,15 +1,15 @@
-import React, {useState,FC} from 'react';
+import React, {FC, useState} from 'react';
 import {Button, Col, DatePicker, Divider, Form, Input, Row, Space} from "antd";
-import moment, {Moment} from "moment";
+import {Moment} from "moment";
 import locale from "antd/es/date-picker/locale/ru_RU";
 import {MinusCircleOutlined, PlusOutlined} from "@ant-design/icons";
 import {useDispatch} from "react-redux";
-import {createdTask} from "../../../../../store/TaskListStore/TaskListStore";
+import {createdTask} from "../../../store/TaskListStore/TaskListStore";
 import '../CreateTaskComponent.scss'
 import {CreateTaskFormModel} from "../CreateTask.model";
 
-export const CreateTaskForm:FC<CreateTaskFormModel> = ({closeModal}) => {
-    const [createdData, setCreatedDate] = useState<Moment>(moment())
+export const CreateTaskForm:FC<CreateTaskFormModel> = ({closeModal,createdTaskData}) => {
+    const [createdData, setCreatedDate] = useState<Moment>(createdTaskData)
     const [created,setCreated] = useState<boolean>(false)
     const dispatch = useDispatch()
     const onSubmit = (data: any) => {
@@ -40,7 +40,7 @@ export const CreateTaskForm:FC<CreateTaskFormModel> = ({closeModal}) => {
                         required: true,
                         message: 'Начало выполнения не может быть пустым'
                     }]}
-                               initialValue={moment()}
+                               initialValue={createdData}
                     >
                         <DatePicker showTime format="DD.MM.YYYY HH:mm:ss" style={{width: '100%'}} locale={locale}
                                     onChange={(date) => (date !== null && setCreatedDate(date))}

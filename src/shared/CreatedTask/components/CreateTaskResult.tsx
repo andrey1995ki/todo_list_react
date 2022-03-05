@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {CreateTaskResultModel} from '../CreateTask.model'
 import {Button, Result} from "antd";
 import {useDispatch} from "react-redux";
-import {receiveTaskList, setCreatedTaskResult} from "../../../../../store/TaskListStore/TaskListStore";
+import {receiveTaskList, setCreatedTaskResult} from "../../../store/TaskListStore/TaskListStore";
 
 export const CreateTaskResult:FC<CreateTaskResultModel> = ({result,closeModal}) => {
     const dispatch = useDispatch()

@@ -8,7 +8,8 @@ export const TaskFilter: FC<TaskFilterModel> = ({
                                                     setCompletedVisible,
                                                     activeVisible,
                                                     setActiveVisible, sort, setSort,
-                                                    locationButton,setSortCalendar
+                                                    locationButton,setSortCalendar,
+                                                    taskInDayVisible
                                                 }) => {
     const [filter, setFilter] = useState<string>('Текущие')
     const [visibleFilter, setVisibleFilter] = useState(false)
@@ -34,6 +35,24 @@ export const TaskFilter: FC<TaskFilterModel> = ({
                         : completedVisible && setActiveVisible(!activeVisible)
                 }}>Закрытые задачи</Checkbox>
             </Menu.Item>
+            {
+                taskInDayVisible &&
+                    <>
+                        <Menu.Divider/>
+                        <Menu.Item key={"created"}>
+                            <Checkbox value="created" checked={taskInDayVisible.createdVisible} onChange={() => {
+                                !taskInDayVisible.createdVisible ? taskInDayVisible.setCreatedVisible(!taskInDayVisible.createdVisible)
+                                    : taskInDayVisible?.plannedVisible && taskInDayVisible.setCreatedVisible(!taskInDayVisible.createdVisible)
+                            }}>{`Созданные ${taskInDayVisible.selectedDate?.format('LL')}`}</Checkbox>
+                        </Menu.Item>
+                        <Menu.Item key={"planned"}>
+                            <Checkbox value="planned" checked={taskInDayVisible.plannedVisible} onChange={() => {
+                                !taskInDayVisible.plannedVisible ? taskInDayVisible.setPlannedVisible(!taskInDayVisible.plannedVisible)
+                                    : taskInDayVisible.createdVisible && taskInDayVisible.setPlannedVisible(!taskInDayVisible.plannedVisible)
+                            }}>{`Заканчиваются ${taskInDayVisible.selectedDate?.format('LL')}`}</Checkbox>
+                        </Menu.Item>
+                    </>
+            }
             <Menu.Divider/>
             <Menu.Item key={"sortItems"}>
                 {

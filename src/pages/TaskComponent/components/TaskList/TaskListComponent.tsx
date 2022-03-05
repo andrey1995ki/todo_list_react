@@ -6,16 +6,16 @@ import {TaskComponent} from "../../../../shared/TaskData/TaskComponent";
 import './TaskListComponent.scss'
 import moment from "moment";
 
-const { Paragraph } = Typography;
+const {Paragraph} = Typography;
 
-export const TaskListComponent: FC<TaskListModelProps> = ({taskList,showModal,setShowModal,needUpdate}) => {
+export const TaskListComponent: FC<TaskListModelProps> = ({taskList, showModal, setShowModal, needUpdate}) => {
     const [idShowTask, setIdShowTask] = useState<string>('0')
-    const modalVisible = (id:string) => {
+    const modalVisible = (id: string) => {
         setIdShowTask(id)
         setShowModal(true)
     }
     return (
-        <div>
+        <div className={'task-list'}>
             <List
                 grid={{
                     gutter: 16,
@@ -27,14 +27,16 @@ export const TaskListComponent: FC<TaskListModelProps> = ({taskList,showModal,se
                     xxl: 3,
                 }}
                 dataSource={taskList}
-                renderItem={(item,index) => (
+                renderItem={(item, index) => (
                     <List.Item className={'card-item'}>
-                        <Card hoverable title={item.taskName} className={`task-card card-${index%2===0 ?'even':'not-even'}`}
-                              extra={<Badge status={item.completed ? "success" : "error"}/>} onClick={()=>modalVisible(item.id)}>
-                            <Paragraph ellipsis={{ rows: 3, expandable: false }}>
-                            {item.taskDescription}
+                        <Card hoverable title={item.taskName}
+                              className={`task-card card-${index % 2 === 0 ? 'even' : 'not-even'}`}
+                              extra={<Badge status={item.completed ? "success" : "error"}/>}
+                              onClick={() => modalVisible(item.id)}>
+                            <Paragraph ellipsis={{rows: 3, expandable: false}}>
+                                {item.taskDescription}
                             </Paragraph>
-                            <Paragraph >
+                            <Paragraph>
                                 Выполнить до: {moment(item.plannedAt).format('LL')}
                             </Paragraph>
                         </Card>

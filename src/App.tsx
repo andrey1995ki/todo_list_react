@@ -6,58 +6,54 @@ import {CalendarOutlined, PieChartOutlined, UnorderedListOutlined,} from '@ant-d
 import {Routing} from "./routing/routing";
 import {NavLink, useLocation} from "react-router-dom";
 
-const { Header, Content, Sider } = Layout;
-const { Title } = Typography;
+const {Header, Content, Sider} = Layout;
+const {Title} = Typography;
 
 function App() {
     let pathname = useLocation().pathname;
-    const [currentMenu,setCurrentMenu]=useState(['0'])
-    useEffect(()=>{
-        if(pathname==='/calendar'){
+    const [currentMenu, setCurrentMenu] = useState(['0'])
+    useEffect(() => {
+        if (pathname === '/calendar') {
             setCurrentMenu(['2'])
-        }
-        else if (pathname==='/statistics'){
+        } else if (pathname === '/statistics') {
             setCurrentMenu(['3'])
-        }
-        else{
+        } else {
             setCurrentMenu(['1'])
         }
-    },[setCurrentMenu,pathname])
+    }, [setCurrentMenu, pathname])
     const [collapsedMenu, setCollapsedMenu] = useState(false)
     const toggleCollapse = () => {
         setCollapsedMenu(!collapsedMenu)
     }
     return (
-        <Layout style={{minHeight: '100vh'}}>
+        <Layout className={'app-layout'}>
             <Sider theme="light" collapsible collapsed={collapsedMenu} onCollapse={toggleCollapse}>
-                <div style={{textAlign:"center",height: 64,lineHeight:"64px"}}>
-                    <Title level={collapsedMenu ?5 :2} style={{color:"#1890ff",lineHeight: "normal",
-                        display: "inline-block",
-                        verticalAlign: "middle"}}>TODOList</Title>
+                <div className={'app-menu-header'}>
+                    <Title level={collapsedMenu ? 5 : 2} className={'app-menu-header-title'}>TODOList</Title>
                 </div>
-                <Divider style={{margin:0}}/>
-                <Menu  selectedKeys={currentMenu} mode="inline">
-                    <Menu.Item key="1" icon={<UnorderedListOutlined />} >
+                <Divider className={'app-menu-divider'}/>
+                <Menu selectedKeys={currentMenu} mode="inline">
+                    <Menu.Item key="1" icon={<UnorderedListOutlined/>}>
                         <NavLink to={"/tasks"}>
                             Задачаи
                         </NavLink>
                     </Menu.Item>
-                    <Menu.Item key="2" icon={<CalendarOutlined />}>
+                    <Menu.Item key="2" icon={<CalendarOutlined/>}>
                         <NavLink to={"/calendar"}>
-                        Календарь
+                            Календарь
                         </NavLink>
                     </Menu.Item>
                     <Menu.Item key="3" icon={<PieChartOutlined/>}>
                         <NavLink to={"/statistics"}>
-                        Статистика
+                            Статистика
                         </NavLink>
                     </Menu.Item>
                 </Menu>
             </Sider>
-            <Layout className="site-layout">
-                <Header className="site-layout-background" style={{padding: 0}}/>
-                <Content style={{ margin: '8px 8px 0', overflow: 'initial' }}>
-                    <div className="site-layout-background" style={{height:"100%",padding:10}}>
+            <Layout className="app-main-layout">
+                <Header className="app-main-layout-background"/>
+                <Content className='app-main-content'>
+                    <div className="app-main-content-background">
                         <Routing/>
                     </div>
                 </Content>

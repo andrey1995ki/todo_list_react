@@ -1,18 +1,27 @@
 $primary-shadow-color: #1890ff29;
 $primary-color: #1890ff;
 
-.card-even{
+.card-even {
   border-radius: 0 25px;
 }
-.card-not-even{
+
+.task-list {
+  overflow: auto;
+  max-height: 80vh;
+  padding: 0 10px;
+}
+
+.card-not-even {
   border-radius: 25px 0;
 }
-.task-card:hover{
+
+.task-card:hover {
   border-color: transparent;
   box-shadow: 0 1px 2px -2px $primary-shadow-color, 0 3px 6px 0 $primary-shadow-color, 0 5px 12px 4px $primary-shadow-color;
 }
-.task-card{
-  .ant-card-head-title{
+
+.task-card {
+  .ant-card-head-title {
     color: $primary-color;
   }
 }
